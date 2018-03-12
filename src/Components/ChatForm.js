@@ -27,10 +27,13 @@ class ChatForm extends Component {
         e.preventDefault();
     }
     render() {
+        var formstyle = {
+            padding:"2em"
+        }
         return (
             <div className="ChatForm">
                 <form onSubmit={this.handleSubmit.bind(this)}>
-                    <div>
+                    <div style={formstyle}>
                         <input type="text" ref="text" />
                         <input type="submit" value="Send" />
                         <br />

@@ -27,14 +27,14 @@ class FileListing extends Component {
   fileItems(){
     const listItems = this.props.files.map((item) =>
       <li className="Files" key={"item-" + item} onClick={() => this.onItemClick(this, item)}>
-         <h3><a href="javascript:void(0)">{item}</a></h3>
+         <h3><a href="javascript:void(0)" >{item}</a></h3>
       </li>
     );
     return <ul>{listItems}</ul>;
   }
 
   render() {
-    const file = (this.state.url_visible ? <a href="javascript:void(0)">{this.state.file_url}</a>: null);
+    const file = (this.state.url_visible ? <a href={this.state.file_url} target="_blank">{this.state.file_url}</a>: null);
     return (
       <div className="FileList">  
           <h3>Click on File Name to get Download Link</h3>    

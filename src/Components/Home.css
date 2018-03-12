@@ -190,17 +190,89 @@ body{
 	margin: 4px;
 	padding-left: 1rem;
 	padding-right: 1rem;
+	width: 100%;
+	float: left;
+}
+.ChatForm{
+	position: absolute;
+	width:100%;
+	bottom:15px;
+	left:0px;
+	float: left;
+}
+.App-intro{
+	position: relative;
 }
 
+.ChatForm form div{
+	float: left;
+	position: relative;
+	width:100%;
+}
+.ChatForm input[type="submit"]{
+	position: absolute;
+	top:53px;
+	right:50px;
+	padding-left: 15px;
+    margin-left: 15px;
+    background: transparent;
+    border: none;
+    border-left: 1px solid #ddd;
+    font-size: 13px;
+	color: #666;
+	outline:none;
+}
+.ChatForm input[type="text"]{
+	height: 55px;
+    border: 1px solid #ddd;
+    border-radius: 2px;
+    font-size: 14px;
+	padding-left: 20px;
+	width: 100%!important;
+}
 .Message:nth-child(odd){
-	background-color: rgb(231, 228, 228);
+	/* background-color: rgb(231, 228, 228); */
 	color: black;
+	float: left;
+	display: inline-block;
 }
 
 .Message:nth-child(even){
 	color: black;
-	background-color:  rgb(245, 209, 141);
+	/* background-color:  rgb(245, 209, 141); */
 	text-align: right;
+	float: right;
+	display: inline-block;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.UserList{
+	padding-left:0px!important;
+}
+.UserList li{
+	list-style: none;
 }
 
 

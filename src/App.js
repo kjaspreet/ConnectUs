@@ -7,6 +7,7 @@ import ChatForm from './Components/ChatForm';
 import FileSharing from './Components/FileSharing';
 import Background from './Components/Background';
 import './Components/Login.css';
+import userimg from './user.png'
 
 
 class App extends Component {
@@ -49,6 +50,7 @@ class App extends Component {
   handleaddMessage(message) {
     let messages = this.state.messages;
     this.setState({ messages: messages });
+    console.log('test:='+message.receiver);
   }
 
   onItemClick(e, item) {
@@ -58,7 +60,6 @@ class App extends Component {
       receiver: item
     });
     this.Message_list(item);
-    e.preventDefault();
   }
 
   //display messages.
@@ -84,13 +85,29 @@ class App extends Component {
 
   //display users.
   User_list() {
+    var mystyle = {
+      marginLeft:"10px",
+      marginTop:"10px",
+      fontSize:"14px"
+    }
+
+    var myastyle = {
+      color:"black"
+    }
     // console.log('current_user:='+this.state.current_user);
     const listItems = this.state.users.map((item, i) =>
       <li key={"item-" + item} onClick={() => this.onItemClick(this, item)}>
-        <h3><a href="javascript:void(0)">{item}</a></h3>
+      <div className="row">
+                <div className="col-md-2">
+        <img className="user_img" src={userimg}/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </div>
+                <div className="col-md-10">
+        <p className="contact-name" style={mystyle}><a style={myastyle} href="javascript:void(0)">{item}</a></p>
+</div>
+</div>
       </li>
     );
-    return <ul>{listItems}</ul>;
+    return <ul className="UserList">{listItems}</ul>;
 
   }
 
@@ -112,6 +129,10 @@ class App extends Component {
 
     var userlist_style = {
       padding: '1rem'
+    }
+
+    var headingstyle = {
+      fontWeight: "bold"
     }
 
     //code
@@ -152,17 +173,18 @@ class App extends Component {
         <div className="MainBody">
           <div style={userlist_style} className="User-List">
             <ul>
-              <h2 onClick={() => this.onContactClick(this)}><a href="javascript:void(0)">Contacts</a></h2>
+              <p  style={headingstyle} onClick={() => this.onContactClick(this)}><a href="javascript:void(0)">Contacts</a></p>
               {this.User_list()}
-              <h2 onClick={() => this.onFileClick(this)}><a href="javascript:void(0)">File Share</a></h2>
+              <p style={headingstyle} onClick={() => this.onFileClick(this)}><a href="javascript:void(0)">File Share</a></p>
             </ul>
           </div>
           <div className="App-intro">
             {/* Render Chat Form and Messages on Click */}
             {/* {chatpg} */}
             {bckgrd}
-            {chatfrm}
+            
             {chatmsg}
+            {chatfrm}
             {file}
           </div>
         </div>

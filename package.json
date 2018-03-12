@@ -2,7 +2,6 @@
   "name": "connectus",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://kjaspreet.github.io/connectusapp",
   "dependencies": {
     "firebase": "^4.9.1",
     "gh-pages": "^1.1.0",
@@ -12,8 +11,6 @@
     "uuid": "^3.2.1"
   },
   "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -b master -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
