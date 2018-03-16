@@ -27,12 +27,19 @@ class LoginForm extends Component {
             }, function () {
                 let userRef = fire.database().ref('users');
 
-                userRef.on('child_added', snapshot => {
-                    if (snapshot.val().username === this.state.user && snapshot.val().password === this.state.password) {
-                        this.setState({ submitted: true });
-                        // console.log('connected: ' + snapshot.child("username").val());
-                    }
+                // userRef.on('child_added', snapshot => {
+                //     if (snapshot.val().username === this.state.user && snapshot.val().password === this.state.password) {
+                //         this.setState({ submitted: true });
+                //         // console.log('connected: ' + snapshot.child("username").val());
+                //     }
+                // });
+
+                fire.auth().signInWithEmailAndPassword(this.refs.text.value, this.refs.password.value).catch(function(error) {
+                    console.log('login failed');
+                    // this.setState({ submitted: false });
                 });
+                this.setState({ submitted: true });
+
             });
 
         }
@@ -58,7 +65,7 @@ class LoginForm extends Component {
                     <p className="form-title">Sign to ConnectUs Account</p>
                     <form className="form-signin" onSubmit={this.handleSubmit.bind(this)}>
                         <span id="reauth-email" className="reauth-email"></span>
-                        <input type="text" ref="text" id="inputEmail" className="form-control" placeholder="Username" required autoFocus/>
+                        <input type="text" ref="text" id="inputEmail" className="form-control" placeholder="Email" required autoFocus/>
                         <input type="password" ref="password" id="inputPassword" className="form-control" placeholder="Password" required/>
                         <div className="row">
                             <div className="col-md-6">

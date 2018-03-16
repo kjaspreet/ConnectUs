@@ -31,12 +31,14 @@ class App extends Component {
     //users
     let userRef = fire.database().ref('users');
     userRef.on('child_added', snapshot => {
+
+      console.log('curr_user:='+this.props.user);
       /* Update React state when message is added at Firebase Database */;
-      if (snapshot.val().username === this.props.user) {
-        this.setState({ current_user: this.props.user });
+      if (snapshot.val().email === this.props.user) {
+        this.setState({ current_user: snapshot.val().name });
       }
       else {
-        user_temp.push(snapshot.val().username);
+        user_temp.push(snapshot.val().name);
       }
       this.setState({ users: user_temp });
     });
@@ -134,6 +136,8 @@ class App extends Component {
     var headingstyle = {
       fontWeight: "bold"
     }
+
+    console.log('usser-details:='+fire.auth().currentUser.photoURL);
 
     //code
 

@@ -7,9 +7,7 @@ class SignUpForm extends Component {
     constructor() {
         super();
         this.state = {
-            fname: '',
-            lname: '',
-            username: '',
+            name: '',
             email: '',
             password: '',
             cpassword: '',
@@ -19,28 +17,31 @@ class SignUpForm extends Component {
     }
 
     handleSubmit(e) {
-        if (this.refs.text.value === '' || this.refs.etext.value === '' || this.refs.password.value === '' || this.refs.cpassword.value === '' || this.refs.ftext.value === '' || this.refs.ltext.value === '') {
+        if (this.refs.etext.value === '' || this.refs.password.value === '' || this.refs.cpassword.value === '' || this.refs.fullname.value === '' ) {
             alert("Enter Details");
         }
         else {
             this.setState({
-                username: this.refs.text.value,
-                firstname: this.refs.ftext.value,
-                lastname: this.refs.ltext.value,
+                name: this.refs.fullname.value,
                 email: this.refs.etext.value,
                 password: this.refs.password.value,
                 cpassword: this.refs.cpassword.value,
                 submitted: true
             }, function () {
                 let user = {
-                    username: this.state.username, password: this.state.password, cpassword: this.state.cpassword,
-                    firstname: this.state.firstname, lastname: this.state.lastname, email: this.state.email
+                    password: this.refs.password.value, cpassword:  this.refs.cpassword.value,
+                    name: this.refs.fullname.value, email: this.refs.etext.value
                 };
                 // console.log('here: '+user.username);
+                if (this.refs.password.value === this.refs.cpassword.value) {
+                    fire.auth().createUserWithEmailAndPassword(this.refs.etext.value, this.refs.cpassword.value).catch(error => {
+                        console.log('error');
+                        this.setState({ error: error });
+                    });
+                }
+
                 fire.database().ref('users').push(user);
-                this.refs.text.value = '';;
-                this.refs.ftext.value = '';
-                this.refs.ltext.value = '';
+                this.refs.fullname.value = '';
                 this.refs.etext.value = '';
                 this.refs.password.value = '';
                 this.refs.cpassword.value = '';
@@ -58,19 +59,15 @@ class SignUpForm extends Component {
 
     render() {
         return (
-
             <div className="login-form">
                 <img className="login-form-logo" src={logo} alt="signup logo" />
                 <p className="form-title">Sign Up to ConnectUs Account</p>
                 <form className="form-signin" onSubmit={this.handleSubmit.bind(this)}>
                     <span id="reauth-email" className="reauth-email"></span>
-                    <input type="text" ref="text" id="inputUsername" className="form-control" placeholder="Username" required autoFocus />
-                    <input type="text" ref="ftext" id="inputFirstname" className="form-control" placeholder="First Name" required autoFocus />
-                    <input type="text" ref="ltext" id="inputLastname" className="form-control" placeholder="Last Name" required autoFocus />
+                    <input type="text" ref="fullname" id="inputFirstname" className="form-control" placeholder="Full Name" required autoFocus />
                     <input type="email" ref="etext" id="inputEmail" className="form-control" placeholder="Email" required autoFocus />
                     <input type="password" ref="password" id="inputPassword" className="form-control" placeholder="Password" required />
                     <input type="password" ref="cpassword" id="inputCPassword" className="form-control" placeholder="Confirm Password" required />
-
                     <input className="btn btn-block btn-signin" type="submit" value="Sign Up" />
                 </form>
             </div>
