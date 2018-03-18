@@ -7,7 +7,7 @@ import ChatForm from './Components/ChatForm';
 import FileSharing from './Components/FileSharing';
 import Background from './Components/Background';
 import './Components/Login.css';
-import userimg from './user.png'
+
 
 
 class App extends Component {
@@ -18,6 +18,7 @@ class App extends Component {
       visible: false,
       file_visible: false,
       users: [],
+      users_pics: [],
       current_user: '',
       sender: '',
       receiver: ''
@@ -27,20 +28,21 @@ class App extends Component {
   //lifecycle method
   componentWillMount() {
     let user_temp = [];
-
+    let pics_temp = [];
     //users
     let userRef = fire.database().ref('users');
     userRef.on('child_added', snapshot => {
 
-      console.log('curr_user:='+this.props.user);
+      // console.log('curr_user:=' + this.props.user);
       /* Update React state when message is added at Firebase Database */;
       if (snapshot.val().email === this.props.user) {
         this.setState({ current_user: snapshot.val().name });
       }
       else {
         user_temp.push(snapshot.val().name);
+        pics_temp.push(snapshot.val().photourl)
       }
-      this.setState({ users: user_temp });
+      this.setState({ users: user_temp, users_pics: pics_temp });
     });
   }
 
@@ -52,10 +54,11 @@ class App extends Component {
   handleaddMessage(message) {
     let messages = this.state.messages;
     this.setState({ messages: messages });
-    console.log('test:='+message.receiver);
+    // console.log('test:=' + message.receiver);
   }
 
   onItemClick(e, item) {
+    console.log('test:='+item);
     this.setState({
       file_visible: false,
       visible: true, // set it to be visible
@@ -66,7 +69,7 @@ class App extends Component {
 
   //display messages.
   Message_list(selected_receiver) {
-    console.log('here sender: ' + this.state.current_user + ' here receiver: ' + selected_receiver);
+    // console.log('here sender: ' + this.state.current_user + ' here receiver: ' + selected_receiver);
     let temp = [];
     let messagesRef = fire.database().ref('messages');
     messagesRef.on('child_added', snapshot => {
@@ -88,25 +91,26 @@ class App extends Component {
   //display users.
   User_list() {
     var mystyle = {
-      marginLeft:"10px",
-      marginTop:"10px",
-      fontSize:"14px"
+      marginLeft: "10px",
+      marginTop: "10px",
+      fontSize: "14px"
     }
 
     var myastyle = {
-      color:"black"
+      color: "black"
     }
     // console.log('current_user:='+this.state.current_user);
+    // let pic_index = 0;
     const listItems = this.state.users.map((item, i) =>
       <li key={"item-" + item} onClick={() => this.onItemClick(this, item)}>
-      <div className="row">
-                <div className="col-md-2">
-        <img className="user_img" src={userimg}/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <div className="row">
+          <div className="col-md-2">
+            <img className="user_img" src={this.state.users_pics[i]} />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         </div>
-                <div className="col-md-10">
-        <p className="contact-name" style={mystyle}><a style={myastyle} href="javascript:void(0)">{item}</a></p>
-</div>
-</div>
+          <div className="col-md-10">
+            <p className="contact-name" style={mystyle}><a style={myastyle} href="javascript:void(0)">{item}</a></p>
+          </div>
+        </div>
       </li>
     );
     return <ul className="UserList">{listItems}</ul>;
@@ -137,7 +141,7 @@ class App extends Component {
       fontWeight: "bold"
     }
 
-    console.log('usser-details:='+fire.auth().currentUser.photoURL);
+    // console.log('user-details:=' + fire.auth().currentUser.photoURL);
 
     //code
 
@@ -177,7 +181,7 @@ class App extends Component {
         <div className="MainBody">
           <div style={userlist_style} className="User-List">
             <ul>
-              <p  style={headingstyle} onClick={() => this.onContactClick(this)}><a href="javascript:void(0)">Contacts</a></p>
+              <p style={headingstyle} onClick={() => this.onContactClick(this)}><a href="javascript:void(0)">Contacts</a></p>
               {this.User_list()}
               <p style={headingstyle} onClick={() => this.onFileClick(this)}><a href="javascript:void(0)">File Share</a></p>
             </ul>
@@ -186,7 +190,7 @@ class App extends Component {
             {/* Render Chat Form and Messages on Click */}
             {/* {chatpg} */}
             {bckgrd}
-            
+
             {chatmsg}
             {chatfrm}
             {file}

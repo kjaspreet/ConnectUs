@@ -17,7 +17,7 @@ class SignUpForm extends Component {
     }
 
     handleSubmit(e) {
-        if (this.refs.etext.value === '' || this.refs.password.value === '' || this.refs.cpassword.value === '' || this.refs.fullname.value === '' ) {
+        if (this.refs.etext.value === '' || this.refs.password.value === '' || this.refs.cpassword.value === '' || this.refs.fullname.value === '') {
             alert("Enter Details");
         }
         else {
@@ -28,19 +28,40 @@ class SignUpForm extends Component {
                 cpassword: this.refs.cpassword.value,
                 submitted: true
             }, function () {
-                let user = {
-                    password: this.refs.password.value, cpassword:  this.refs.cpassword.value,
-                    name: this.refs.fullname.value, email: this.refs.etext.value
-                };
+                let db_pass = this.refs.password.value;
+                let db_cpass = this.refs.cpassword.value;
+                let db_name = this.refs.fullname.value;
+                let db_email = this.refs.etext.value;
                 // console.log('here: '+user.username);
                 if (this.refs.password.value === this.refs.cpassword.value) {
-                    fire.auth().createUserWithEmailAndPassword(this.refs.etext.value, this.refs.cpassword.value).catch(error => {
+                    fire.auth().createUserWithEmailAndPassword(this.refs.etext.value, this.refs.cpassword.value).then(user => {
+
+                        //update user profile photo
+                        var file = this.fileUpload.files[0];
+                        var filename = this.fileUpload.files[0].name;
+                        var storage = fire.storage();
+                        var storageRef = storage.ref();
+                        var blob = new Blob([file]);
+                        storageRef.child('users/' + filename).put(blob).then((snapshot) => {
+                            // added this part which as grabbed the download url from the pushed snapshot
+                            // let user_profile = fire.auth().currentUser;
+                            user.updateProfile({ photoURL: snapshot.downloadURL });
+                            // console.log('user-photo:=' + fire.auth().user.photoURL);
+                            let user_db = {
+                                password: db_pass, cpassword: db_cpass,
+                                name: db_name, email: db_email,
+                                photourl: snapshot.downloadURL
+                            };
+
+                            fire.database().ref('users').push(user_db);
+                        });
+
+                    }).catch(error => {
                         console.log('error');
                         this.setState({ error: error });
                     });
                 }
 
-                fire.database().ref('users').push(user);
                 this.refs.fullname.value = '';
                 this.refs.etext.value = '';
                 this.refs.password.value = '';
@@ -66,6 +87,7 @@ class SignUpForm extends Component {
                     <span id="reauth-email" className="reauth-email"></span>
                     <input type="text" ref="fullname" id="inputFirstname" className="form-control" placeholder="Full Name" required autoFocus />
                     <input type="email" ref="etext" id="inputEmail" className="form-control" placeholder="Email" required autoFocus />
+                    <input type="file" className="form-control" ref={(ref) => this.fileUpload = ref} id="file" required autoFocus />
                     <input type="password" ref="password" id="inputPassword" className="form-control" placeholder="Password" required />
                     <input type="password" ref="cpassword" id="inputCPassword" className="form-control" placeholder="Confirm Password" required />
                     <input className="btn btn-block btn-signin" type="submit" value="Sign Up" />
