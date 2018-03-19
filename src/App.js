@@ -21,7 +21,8 @@ class App extends Component {
       users_pics: [],
       current_user: '',
       sender: '',
-      receiver: ''
+      receiver: '',
+      sender_pic:''
     }
   }
 
@@ -36,7 +37,7 @@ class App extends Component {
       // console.log('curr_user:=' + this.props.user);
       /* Update React state when message is added at Firebase Database */;
       if (snapshot.val().email === this.props.user) {
-        this.setState({ current_user: snapshot.val().name });
+        this.setState({ current_user: snapshot.val().name, sender_pic: snapshot.val().photourl });
       }
       else {
         user_temp.push(snapshot.val().name);
@@ -52,13 +53,18 @@ class App extends Component {
   }
 
   handleaddMessage(message) {
+    console.log('msg state:='+this.state.messages);
     let messages = this.state.messages;
+    //just for first message
+    if(this.state.messages.length === 0)
+      messages.push(message);
     this.setState({ messages: messages });
-    // console.log('test:=' + message.receiver);
+    console.log('msg table:=' + messages[0].photourl);
   }
 
   onItemClick(e, item) {
-    console.log('test:='+item);
+    // console.log('test:='+item);
+    // console.log('dekho:='+pic);
     this.setState({
       file_visible: false,
       visible: true, // set it to be visible
@@ -76,8 +82,8 @@ class App extends Component {
       /* Update React state when message is added at Firebase Database */;
       if ((snapshot.val().sender === this.state.current_user && snapshot.val().receiver === selected_receiver) ||
         (snapshot.val().sender === selected_receiver && snapshot.val().receiver === this.state.current_user)) {
-        console.log('inside sender: ' + this.state.current_user + ' inside receiver: ' + selected_receiver);
-        temp.push({ id: snapshot.val().id, text: snapshot.val().text, sender: snapshot.val().sender, receiver: snapshot.val().receiver });
+        // console.log('inside sender: ' + this.state.current_user + ' inside receiver: ' + selected_receiver);
+        temp.push({ id: snapshot.val().id, text: snapshot.val().text, sender: snapshot.val().sender, receiver: snapshot.val().receiver, photourl: snapshot.val().photourl });
         this.setState({ messages: temp });
       }
       else {
@@ -99,7 +105,7 @@ class App extends Component {
     var myastyle = {
       color: "black"
     }
-    // console.log('current_user:='+this.state.current_user);
+    // console.log('user table:='+this.state.users_pics[0]);
     // let pic_index = 0;
     const listItems = this.state.users.map((item, i) =>
       <li key={"item-" + item} onClick={() => this.onItemClick(this, item)}>
@@ -145,8 +151,8 @@ class App extends Component {
 
     //code
 
-    const chatmsg = (this.state.visible ? <ChatHome messages={this.state.messages} /> : null);
-    const chatfrm = (this.state.visible ? <ChatForm current_user={this.state.current_user} receiver={this.state.receiver} addMessage={this.handleaddMessage.bind(this)} /> : null);
+    const chatmsg = (this.state.visible ? <ChatHome messages={this.state.messages}/> : null);
+    const chatfrm = (this.state.visible ? <ChatForm sender_pic={this.state.sender_pic} current_user={this.state.current_user} receiver={this.state.receiver} addMessage={this.handleaddMessage.bind(this)} /> : null);
     const file = (this.state.file_visible ? <FileSharing /> : null);
     const bckgrd = (!this.state.file_visible && !this.state.visible ? <Background /> : null);
     return (
