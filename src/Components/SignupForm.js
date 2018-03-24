@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import fire from './fire';
 import logo from './../logo.png';
+import Home from './Home';
 
 
 class SignUpForm extends Component {
@@ -79,6 +80,10 @@ class SignUpForm extends Component {
 
 
     render() {
+        if (this.state.clicked) {
+            return (<Home />);
+        }
+        else{
         return (
             <div className="login-wrapper">
             <div className="login-form">
@@ -92,10 +97,12 @@ class SignUpForm extends Component {
                     <input type="password" ref="password" id="inputPassword" className="form-control" placeholder="Password" required />
                     <input type="password" ref="cpassword" id="inputCPassword" className="form-control" placeholder="Confirm Password" required />
                     <input className="btn btn-block btn-signin" type="submit" value="Sign Up" />
+                    <a href="javascript:void(0)" className="regsiter-link" onClick={this.handleSubmit2.bind(this)}> Already have an Account? Sign In</a>
                 </form>
             </div>
             </div>
         );
+    }
     }
 }
 
