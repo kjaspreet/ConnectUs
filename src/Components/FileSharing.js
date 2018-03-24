@@ -31,6 +31,14 @@ class FileSharing extends Component {
         this.setState({ file_list: files });
       }
 
+    // Remove deleted file from the state
+    handledeleteFile(id)
+    {
+        this.setState({
+            file_list: this.state.file_list.filter(el => el != id )
+        });
+    }
+
     render() {
         var file_style = {
             padding: '1rem'
@@ -39,7 +47,7 @@ class FileSharing extends Component {
         return (
             <div style={file_style} className="FileSharingForm">
                <FileSharingForm addFile={this.handleaddFile.bind(this)}/><br/><br/>
-                <FileListing files={this.state.file_list} addFile={this.handleaddFile.bind(this)}/>
+                <FileListing files={this.state.file_list} deleteFile={this.handledeleteFile.bind(this)}/>
             </div>
         );
     }
