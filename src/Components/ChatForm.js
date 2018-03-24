@@ -38,7 +38,7 @@ class ChatForm extends Component {
                     <div style={formstyle}>
                         <input type="text" ref="text" />
                         <input type="submit" value="Send" />
-                        <br />
+                        
                     </div>
 
                 </form>

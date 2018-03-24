@@ -60,6 +60,7 @@ class LoginForm extends Component {
         }
         else {
             return (
+                <div className="login-wrapper">
                 <div className="login-form">
                     <img className="login-form-logo" src={logo} alt="logo"/>
                     <p className="form-title">Sign to ConnectUs Account</p>
@@ -84,7 +85,9 @@ class LoginForm extends Component {
                         <input className="btn btn-block btn-signin" type="submit" value="Sign in"/>
                             <a href="javascript:void(0)" className="regsiter-link" onClick={this.handleSubmit2.bind(this)}> Don't have an Account? Create One</a>
                     </form>
-                </div>);
+                </div>
+                </div>
+                );
         }
 
     }

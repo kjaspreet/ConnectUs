@@ -6,9 +6,9 @@ class LoginPage extends Component {
 
     render() {
         return (
-            <div className="login-wrapper">
+            // <div className="login-wrapper">
                 <LoginForm />
-            </div>
+            // </div>
         );
     }
 }

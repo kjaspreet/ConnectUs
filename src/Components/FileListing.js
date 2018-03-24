@@ -7,7 +7,8 @@ class FileListing extends Component {
         this.state = {
             visible: false,
             file_url: '',
-            url_visible: false
+            url_visible: false,
+            file_list: {}
         }
     }
 
@@ -24,10 +25,32 @@ class FileListing extends Component {
         });
       }
 
+    onDeleteClick(e,item)
+    {
+        fire.database().ref('files').orderByChild('file_name').equalTo(item).on('child_added', snapshot => {
+            // console.log('here:='+snapshot.ref);
+            snapshot.ref.remove();
+            this.GetDB();
+        });       
+    }
+
+    GetDB()
+    {
+        let file_temp = [];
+        //files
+        let fileRef = fire.database().ref('files');
+        fileRef.on('child_added', snapshot => {
+      /* Update React state when message is added at Firebase Database */;
+            file_temp.push(snapshot.val().file_name);
+            this.setState({ file_list: file_temp });
+        });
+        this.props.addFile(this.state.file_list);
+    }
+
   fileItems(){
     const listItems = this.props.files.map((item) =>
-      <li className="Files" key={"item-" + item} onClick={() => this.onItemClick(this, item)}>
-         <h3><a href="javascript:void(0)" >{item}</a></h3>
+      <li className="Files" key={"item-" + item} >
+         <h3><a href="javascript:void(0)" onClick={() => this.onItemClick(this, item)}>{item}</a><button onClick={() => this.onDeleteClick(this, item)}>X</button></h3>
       </li>
     );
     return <ul>{listItems}</ul>;

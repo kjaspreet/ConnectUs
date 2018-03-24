@@ -22,7 +22,8 @@ class App extends Component {
       current_user: '',
       sender: '',
       receiver: '',
-      sender_pic:''
+      sender_pic: '',
+      receiver_email: ''
     }
   }
 
@@ -53,10 +54,10 @@ class App extends Component {
   }
 
   handleaddMessage(message) {
-    console.log('msg state:='+this.state.messages);
+    console.log('msg state:=' + this.state.messages);
     let messages = this.state.messages;
     //just for first message
-    if(this.state.messages.length === 0)
+    if (this.state.messages.length === 0)
       messages.push(message);
     this.setState({ messages: messages });
     console.log('msg table:=' + messages[0].photourl);
@@ -71,6 +72,18 @@ class App extends Component {
       receiver: item
     });
     this.Message_list(item);
+    this.GetReceiverEmail(item);
+  }
+
+  GetReceiverEmail(item)
+  {
+    let messagesRef = fire.database().ref('users');
+    messagesRef.on('child_added', snapshot => {
+      if (snapshot.val().name === item)
+      {
+        this.setState({receiver_email:snapshot.val().email });
+      }
+    });
   }
 
   //display messages.
@@ -109,12 +122,16 @@ class App extends Component {
     // let pic_index = 0;
     const listItems = this.state.users.map((item, i) =>
       <li key={"item-" + item} onClick={() => this.onItemClick(this, item)}>
-        <div className="row">
-          <div className="col-md-2">
-            <img className="user_img" src={this.state.users_pics[i]} />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        </div>
-          <div className="col-md-10">
-            <p className="contact-name" style={mystyle}><a style={myastyle} href="javascript:void(0)">{item}</a></p>
+        <div className="contact-wrap">
+          <div className="row no-gutters">
+            <div className="col-md-2">
+              <img className="user_img" src={this.state.users_pics[i]} />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </div>
+            <div className="col-md-10">
+              <div className="msg-wrapper">
+                <p className="contact-name" style={mystyle}><a style={myastyle} href="javascript:void(0)">{item}</a></p>
+              </div>
+            </div>
           </div>
         </div>
       </li>
@@ -128,6 +145,12 @@ class App extends Component {
     // console.log("clicked");
   }
 
+  onSignOut()
+  {
+    // console.log('signout');
+    fire.auth().signOut();
+  }
+
   onContactClick() {
     this.setState({ file_visible: false, visible: false });
     // console.log("clicked");
@@ -139,9 +162,9 @@ class App extends Component {
       color: 'black'
     }
 
-    var userlist_style = {
-      padding: '1rem'
-    }
+    // var userlist_style = {
+    //   padding: '1rem'
+    // }
 
     var headingstyle = {
       fontWeight: "bold"
@@ -151,7 +174,7 @@ class App extends Component {
 
     //code
 
-    const chatmsg = (this.state.visible ? <ChatHome messages={this.state.messages}/> : null);
+    const chatmsg = (this.state.visible ? <ChatHome email={this.state.receiver_email} receiver={this.state.receiver} messages={this.state.messages} /> : null);
     const chatfrm = (this.state.visible ? <ChatForm sender_pic={this.state.sender_pic} current_user={this.state.current_user} receiver={this.state.receiver} addMessage={this.handleaddMessage.bind(this)} /> : null);
     const file = (this.state.file_visible ? <FileSharing /> : null);
     const bckgrd = (!this.state.file_visible && !this.state.visible ? <Background /> : null);
@@ -173,32 +196,38 @@ class App extends Component {
               </li>
               <li className="nav-item dropdown">
                 <a className="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  &nbsp;<strong>{this.state.current_user}</strong>
+                  <img src={this.state.sender_pic} className="user_img" />&nbsp;<strong>{this.state.current_user}</strong>
                 </a>
                 <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                   {/* <a className="dropdown-item" href="#">My Account</a> */}
                   {/* <div className="dropdown-divider"></div> */}
-                  <a className="dropdown-item" href="">Sign Out</a>
+                  <a className="dropdown-item" href="" onClick={() => this.onSignOut(this)}>Sign Out</a>
                 </div>
               </li>
             </ul>
           </div>
         </div>
-        <div className="MainBody">
-          <div style={userlist_style} className="User-List">
-            <ul>
-              <p style={headingstyle} onClick={() => this.onContactClick(this)}><a href="javascript:void(0)">Contacts</a></p>
-              {this.User_list()}
-              <p style={headingstyle} onClick={() => this.onFileClick(this)}><a href="javascript:void(0)">File Share</a></p>
-            </ul>
+        {/* Main Body Starts */}
+        <div className="MainBody row no-gutters">
+          {/* User Contact List Part */}
+          <div className="User-List col-3 col-sm-3 col-md-3">
+            <div className="contact-list">
+              <ul>
+                <h6 style={headingstyle} onClick={() => this.onContactClick(this)}><a href="javascript:void(0)">Contacts</a></h6>
+                {this.User_list()}
+                <h6 style={headingstyle} onClick={() => this.onFileClick(this)}><a href="javascript:void(0)">File Share</a></h6>
+              </ul>
+            </div>
           </div>
-          <div className="App-intro">
+          {/* Chat Area Part */}
+          <div className="col-9 col-sm-9 col-md-9">
             {/* Render Chat Form and Messages on Click */}
             {/* {chatpg} */}
             {bckgrd}
-
+            <div className="chat-wrapper">
             {chatmsg}
             {chatfrm}
+            </div>
             {file}
           </div>
         </div>

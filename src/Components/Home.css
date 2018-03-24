@@ -13,6 +13,7 @@ body{
 .user_img{
 	width: 50px;
 	border-radius: 50%;
+	margin: 0 auto;
 }
 .nav-ul-custom li a{
 	border-right: 1.9px solid #ccc;
@@ -42,9 +43,48 @@ body{
 	height: calc(100vh - 68px);
 	overflow: auto;
 }
+.contact-list ul{
+	padding-left: 0;
+}
+.audio-call {
+    background: #784c8b;
+}
+
+.call-btn {
+	width: 50px;
+	height: 50px;
+    background: #784c8a;
+    border-radius: 50%;
+    color: #fff;
+    min-height: 60px;
+    min-width: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+	margin: 0 5px;
+}
+.chat-wrapper {
+    padding: 20px 0px 20px 20px;
+    display: flex;
+    flex-direction: column;
+}
+.chat-inner-wrapper {
+    margin-top: 25px;
+    overflow: auto;
+    max-height: 350px;
+    min-height: 350px;
+	flex-basis: 50%;
+}
 .contact-name{
 	margin: 0;
 	font-size: 14px;
+	padding:0px 0 16px 10px;
+	border-bottom: 1.5px solid #ddd;
+}
+.chat-inner-wrapper ul {
+    padding: 0 15px 0 0;
+    display: inline-block;
+    overflow-x: hidden;
 }
 .active-badge{
 	color: #28A745;
@@ -68,7 +108,7 @@ body{
 	font-weight: 400;
 }
 .msg-wrapper{
-	border-bottom: 1.5px solid #ddd;
+	
 	padding-bottom: 15px;
 	margin-bottom: 20px;
 }
@@ -193,13 +233,13 @@ body{
 	width: 100%;
 	float: left;
 }
-.ChatForm{
+/* .ChatForm{
 	position: absolute;
 	width:100%;
 	bottom:15px;
 	left:0px;
 	float: left;
-}
+} */
 .App-intro{
 	position: relative;
 }

@@ -26,6 +26,7 @@ class FileSharing extends Component {
     }
 
     handleaddFile(file) {
+        console.log('check state:='+this.state.file_list.file_name);
         let files = this.state.file_list;
         this.setState({ file_list: files });
       }
@@ -38,7 +39,7 @@ class FileSharing extends Component {
         return (
             <div style={file_style} className="FileSharingForm">
                <FileSharingForm addFile={this.handleaddFile.bind(this)}/><br/><br/>
-                <FileListing files={this.state.file_list} />
+                <FileListing files={this.state.file_list} addFile={this.handleaddFile.bind(this)}/>
             </div>
         );
     }
