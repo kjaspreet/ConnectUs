@@ -80,6 +80,7 @@ class SignUpForm extends Component {
 
     render() {
         return (
+            <div className="login-wrapper">
             <div className="login-form">
                 <img className="login-form-logo" src={logo} alt="signup logo" />
                 <p className="form-title">Sign Up to ConnectUs Account</p>
@@ -92,6 +93,7 @@ class SignUpForm extends Component {
                     <input type="password" ref="cpassword" id="inputCPassword" className="form-control" placeholder="Confirm Password" required />
                     <input className="btn btn-block btn-signin" type="submit" value="Sign Up" />
                 </form>
+            </div>
             </div>
         );
     }
