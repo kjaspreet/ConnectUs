@@ -3,6 +3,7 @@ import fire from './fire';
 import App from './../App';
 import SignUpPage from './SignUpPage';
 import logo from './../logo.png';
+import ForgotPassword from './ForgotPassword';
 
 class LoginForm extends Component {
     constructor() {
@@ -11,7 +12,8 @@ class LoginForm extends Component {
             user: '',
             password: '',
             submitted: false,
-            clicked: false
+            clicked: false,
+            forgot_pass: false
         }
     }
 
@@ -46,8 +48,16 @@ class LoginForm extends Component {
         e.preventDefault();
     }
 
-    handleSubmit2(e) {
+    handleSubmit2(e) 
+    {
         this.setState({ clicked: true });
+        e.preventDefault();
+    }
+
+
+    handleForgotPassword(e)
+    {
+        this.setState({ forgot_pass: true });
         e.preventDefault();
     }
 
@@ -57,6 +67,9 @@ class LoginForm extends Component {
         }
         else if (this.state.clicked) {
             return (<SignUpPage />);
+        }
+        else if (this.state.forgot_pass) {
+            return (<ForgotPassword />);
         }
         else {
             return (
@@ -77,7 +90,7 @@ class LoginForm extends Component {
                                 </div>
                             </div>
                             <div className="col-md-6 text-right">
-                                <a href="javascript:void(0)" className="forgot-password">
+                                <a href="javascript:void(0)" className="forgot-password" onClick={this.handleForgotPassword.bind(this)}>
                                     <small className="forgot-pass">Forgot password?</small>
                                 </a>
                             </div>

@@ -31,8 +31,8 @@ class ChatHome extends Component {
   render() {
     return (
       <div className="ChatHome">  
-      <div class="row no-gutters">
-                <div class="col-md-9">
+      <div className="row no-gutters">
+                <div className="col-md-9">
       <div className="chat-title">
                     <h5>{this.props.receiver} <i className="fas active-badge"></i></h5>
                     <small>{this.props.email}</small>
