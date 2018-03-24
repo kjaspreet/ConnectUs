@@ -51,7 +51,7 @@ class FileListing extends Component {
   fileItems(){
     const listItems = this.props.files.map((item) =>
       <li className="Files" key={item} >
-         <h3><a href="javascript:void(0)" onClick={() => this.onItemClick(this, item)}>{item}</a><button onClick={() => this.onDeleteFile(this, item)}>X</button></h3>
+         <h5><a href="javascript:void(0)" onClick={() => this.onItemClick(this, item)}>{item}</a>&nbsp;&nbsp;&nbsp;&nbsp;<button onClick={() => this.onDeleteFile(this, item)}>X</button></h5>
       </li>
     );
     return <ul>{listItems}</ul>;
@@ -61,9 +61,9 @@ class FileListing extends Component {
     const file = (this.state.url_visible ? <a href={this.state.file_url} target="_blank">{this.state.file_url}</a>: null);
     return (
       <div className="FileList">  
-          <h3>Click on File Name to get Download Link</h3>    
+          <h5>Click on File Name to get Download Link</h5>    
           {this.fileItems()}
-          <h3>Download Link</h3><br/>{file}    
+          <h5>Download Link</h5><br/>{file}    
       </div>
     );
   }

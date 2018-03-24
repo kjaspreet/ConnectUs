@@ -239,8 +239,9 @@ class App extends Component {
             <div className="chat-wrapper">
             {chatmsg}
             {chatfrm}
-            </div>
             {file}
+            </div>
+            
           </div>
         </div>
       </div>

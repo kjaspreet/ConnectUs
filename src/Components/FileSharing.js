@@ -12,7 +12,7 @@ class FileSharing extends Component {
         }
 
     }
-    
+
     //lifecycle method
     componentWillMount() {
         let file_temp = [];
@@ -26,28 +26,28 @@ class FileSharing extends Component {
     }
 
     handleaddFile(file) {
-        console.log('check state:='+this.state.file_list.file_name);
+        console.log('check state:=' + this.state.file_list.file_name);
         let files = this.state.file_list;
         this.setState({ file_list: files });
-      }
+    }
 
     // Remove deleted file from the state
-    handledeleteFile(id)
-    {
+    handledeleteFile(id) {
         this.setState({
-            file_list: this.state.file_list.filter(el => el != id )
+            file_list: this.state.file_list.filter(el => el != id)
         });
     }
 
     render() {
-        var file_style = {
-            padding: '1rem'
-        }
+        // var file_style = {
+        //     padding: '1rem'
+        // }
 
         return (
-            <div style={file_style} className="FileSharingForm">
-               <FileSharingForm addFile={this.handleaddFile.bind(this)}/><br/><br/>
-                <FileListing files={this.state.file_list} deleteFile={this.handledeleteFile.bind(this)}/>
+            <div className="FileSharingForm">
+                <h5>Share files with your classmates</h5><br/><br/>
+                <FileSharingForm addFile={this.handleaddFile.bind(this)} /><br />
+                <FileListing files={this.state.file_list} deleteFile={this.handledeleteFile.bind(this)} />
             </div>
         );
     }
