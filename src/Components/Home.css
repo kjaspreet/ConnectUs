@@ -226,12 +226,11 @@ body{
 	margin: 25px 0 0;
 }
 
-.Message{
+.sender, .receiver{
 	margin: 4px;
 	padding-left: 1rem;
 	padding-right: 1rem;
 	width: 100%;
-	float: left;
 }
 /* .ChatForm{
 	position: absolute;
@@ -270,14 +269,14 @@ body{
 	padding-left: 20px;
 	width: 100%!important;
 }
-.Message:nth-child(odd){
+.receiver{
 	/* background-color: rgb(231, 228, 228); */
 	color: black;
 	float: left;
 	display: inline-block;
 }
 
-.Message:nth-child(even){
+.sender{
 	color: black;
 	/* background-color:  rgb(245, 209, 141); */
 	text-align: right;

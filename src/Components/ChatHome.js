@@ -4,12 +4,6 @@ import fire from './fire';
 class ChatHome extends Component {
 
   messageItems(){
-    // console.log('tt:='+this.props.messages[0].photoURL);
-    // var ul_style = {
-    //   listStyleType: 'none',
-    //   padding: '2rem'
-    // }
-
     var msgstyle = {
       background: "#555",
       color: "#fff",
@@ -19,7 +13,7 @@ class ChatHome extends Component {
     }
 
     const listItems = this.props.messages.map((item) =>
-      <li className="Message" key={"item-" + item.id}>
+      <li className={item.cl_name} key={"item-" + item.id}>
          <img className="user_img" src={item.photourl}/>&nbsp;&nbsp;&nbsp;
         <p style={msgstyle}>{item.text}</p>
       </li>

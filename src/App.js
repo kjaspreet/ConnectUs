@@ -90,20 +90,32 @@ class App extends Component {
   Message_list(selected_receiver) {
     // console.log('here sender: ' + this.state.current_user + ' here receiver: ' + selected_receiver);
     let temp = [];
+    let c_name= '';
     let messagesRef = fire.database().ref('messages');
     messagesRef.on('child_added', snapshot => {
       /* Update React state when message is added at Firebase Database */;
       if ((snapshot.val().sender === this.state.current_user && snapshot.val().receiver === selected_receiver) ||
         (snapshot.val().sender === selected_receiver && snapshot.val().receiver === this.state.current_user)) {
-        // console.log('inside sender: ' + this.state.current_user + ' inside receiver: ' + selected_receiver);
-        temp.push({ id: snapshot.val().id, text: snapshot.val().text, sender: snapshot.val().sender, receiver: snapshot.val().receiver, photourl: snapshot.val().photourl });
+        
+        //set classname
+        if(snapshot.val().sender === this.state.current_user)
+        {
+          // console.log("sender");
+          c_name = "sender";
+        }
+        else
+        {
+          // console.log("receiver");
+          c_name = "receiver";
+        }
+
+        temp.push({ id: snapshot.val().id, text: snapshot.val().text, sender: snapshot.val().sender, receiver: snapshot.val().receiver, photourl: snapshot.val().photourl, cl_name: c_name });
+
         this.setState({ messages: temp });
       }
       else {
         this.setState({ messages: temp });
       }
-
-      // console.log('main: '+temp);
     });
   }
 
