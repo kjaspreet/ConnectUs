@@ -19,7 +19,6 @@ class ChatHome extends Component {
     }
 
     const listItems = this.props.messages.map((item) =>
-    
       <li className="Message" key={"item-" + item.id}>
          <img className="user_img" src={item.photourl}/>&nbsp;&nbsp;&nbsp;
         <p style={msgstyle}>{item.text}</p>
