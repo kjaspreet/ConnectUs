@@ -23,7 +23,8 @@ class App extends Component {
       sender: '',
       receiver: '',
       sender_pic: '',
-      receiver_email: ''
+      receiver_email: '',
+      callLink: ''
     }
   }
 
@@ -186,7 +187,7 @@ class App extends Component {
 
     //code
 
-    const chatmsg = (this.state.visible ? <ChatHome email={this.state.receiver_email} receiver={this.state.receiver} messages={this.state.messages} /> : null);
+    const chatmsg = (this.state.visible ? <ChatHome email={this.state.receiver_email} receiver={this.state.receiver} messages={this.state.messages} sender_pic={this.state.sender_pic} current_user={this.state.current_user}  addMessage={this.handleaddMessage.bind(this)}/> : null);
     const chatfrm = (this.state.visible ? <ChatForm sender_pic={this.state.sender_pic} current_user={this.state.current_user} receiver={this.state.receiver} addMessage={this.handleaddMessage.bind(this)} /> : null);
     const file = (this.state.file_visible ? <FileSharing /> : null);
     const bckgrd = (!this.state.file_visible && !this.state.visible ? <Background /> : null);
