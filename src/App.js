@@ -39,11 +39,19 @@ class App extends Component {
       // console.log('curr_user:=' + this.props.user);
       /* Update React state when message is added at Firebase Database */;
       if (snapshot.val().email === this.props.user) {
-        this.setState({ current_user: snapshot.val().name, sender_pic: snapshot.val().photourl });
+        //set default pic
+        if (snapshot.val().photourl === '')
+          this.setState({ current_user: snapshot.val().name, sender_pic: 'https://firebasestorage.googleapis.com/v0/b/capstone-f88ec.appspot.com/o/users%2Fdefault.png?alt=media&token=10f37bf7-a10e-42db-997a-0cce6dde0dd4' });
+        else
+          this.setState({ current_user: snapshot.val().name, sender_pic: snapshot.val().photourl });
       }
       else {
         user_temp.push(snapshot.val().name);
-        pics_temp.push(snapshot.val().photourl)
+        //set default pic
+        if (snapshot.val().photourl === '')
+          pics_temp.push('https://firebasestorage.googleapis.com/v0/b/capstone-f88ec.appspot.com/o/users%2Fdefault.png?alt=media&token=10f37bf7-a10e-42db-997a-0cce6dde0dd4');
+        else
+          pics_temp.push(snapshot.val().photourl)
       }
       this.setState({ users: user_temp, users_pics: pics_temp });
     });
@@ -76,13 +84,11 @@ class App extends Component {
     this.GetReceiverEmail(item);
   }
 
-  GetReceiverEmail(item)
-  {
+  GetReceiverEmail(item) {
     let messagesRef = fire.database().ref('users');
     messagesRef.on('child_added', snapshot => {
-      if (snapshot.val().name === item)
-      {
-        this.setState({receiver_email:snapshot.val().email });
+      if (snapshot.val().name === item) {
+        this.setState({ receiver_email: snapshot.val().email });
       }
     });
   }
@@ -91,21 +97,19 @@ class App extends Component {
   Message_list(selected_receiver) {
     // console.log('here sender: ' + this.state.current_user + ' here receiver: ' + selected_receiver);
     let temp = [];
-    let c_name= '';
+    let c_name = '';
     let messagesRef = fire.database().ref('messages');
     messagesRef.on('child_added', snapshot => {
       /* Update React state when message is added at Firebase Database */;
       if ((snapshot.val().sender === this.state.current_user && snapshot.val().receiver === selected_receiver) ||
         (snapshot.val().sender === selected_receiver && snapshot.val().receiver === this.state.current_user)) {
-        
+
         //set classname
-        if(snapshot.val().sender === this.state.current_user)
-        {
+        if (snapshot.val().sender === this.state.current_user) {
           // console.log("sender");
           c_name = "sender";
         }
-        else
-        {
+        else {
           // console.log("receiver");
           c_name = "receiver";
         }
@@ -158,8 +162,7 @@ class App extends Component {
     // console.log("clicked");
   }
 
-  onSignOut()
-  {
+  onSignOut() {
     // console.log('signout');
     fire.auth().signOut();
   }
@@ -187,7 +190,7 @@ class App extends Component {
 
     //code
 
-    const chatmsg = (this.state.visible ? <ChatHome email={this.state.receiver_email} receiver={this.state.receiver} messages={this.state.messages} sender_pic={this.state.sender_pic} current_user={this.state.current_user}  addMessage={this.handleaddMessage.bind(this)}/> : null);
+    const chatmsg = (this.state.visible ? <ChatHome email={this.state.receiver_email} receiver={this.state.receiver} messages={this.state.messages} sender_pic={this.state.sender_pic} current_user={this.state.current_user} addMessage={this.handleaddMessage.bind(this)} /> : null);
     const chatfrm = (this.state.visible ? <ChatForm sender_pic={this.state.sender_pic} current_user={this.state.current_user} receiver={this.state.receiver} addMessage={this.handleaddMessage.bind(this)} /> : null);
     const file = (this.state.file_visible ? <FileSharing /> : null);
     const bckgrd = (!this.state.file_visible && !this.state.visible ? <Background /> : null);
@@ -238,11 +241,11 @@ class App extends Component {
             {/* {chatpg} */}
             {bckgrd}
             <div className="chat-wrapper">
-            {chatmsg}
-            {chatfrm}
-            {file}
+              {chatmsg}
+              {chatfrm}
+              {file}
             </div>
-            
+
           </div>
         </div>
       </div>
