@@ -113,10 +113,17 @@ class App extends Component {
           // console.log("receiver");
           c_name = "receiver";
         }
+        if (snapshot.val().text === 'Video call is requested. Please click on Calling Button.' && snapshot.val().sender === this.state.current_user) {
+          console.log('got it');
+          //Don't update
+        }
+        else {
 
-        temp.push({ id: snapshot.val().id, text: snapshot.val().text, sender: snapshot.val().sender, receiver: snapshot.val().receiver, photourl: snapshot.val().photourl, cl_name: c_name });
+          temp.push({ id: snapshot.val().id, text: snapshot.val().text, sender: snapshot.val().sender, receiver: snapshot.val().receiver, photourl: snapshot.val().photourl, cl_name: c_name });
 
-        this.setState({ messages: temp });
+          this.setState({ messages: temp });
+
+        }
       }
       else {
         this.setState({ messages: temp });
