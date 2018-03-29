@@ -16,6 +16,7 @@ class App extends Component {
     this.state = {
       messages: [],
       visible: false,
+      call_visible: false,
       file_visible: false,
       users: [],
       users_pics: [],
@@ -63,13 +64,19 @@ class App extends Component {
   }
 
   handleaddMessage(message) {
-    console.log('msg state:=' + this.state.messages);
+    // console.log('msg state:=' + this.state.messages);
     let messages = this.state.messages;
     //just for first message
     if (this.state.messages.length === 0)
       messages.push(message);
     this.setState({ messages: messages });
-    console.log('msg table:=' + messages[0].photourl);
+    // console.log('msg table:=' + messages[0].photourl);
+  }
+
+  handleCall(call)
+  {
+    // console.log(call);
+    this.setState({call_visible: call});
   }
 
   onItemClick(e, item) {
@@ -114,7 +121,7 @@ class App extends Component {
           c_name = "receiver";
         }
         if (snapshot.val().text === 'Video call is requested. Please click on Calling Button.' && snapshot.val().sender === this.state.current_user) {
-          console.log('got it');
+          // console.log('got it');
           //Don't update
         }
         else {
@@ -197,7 +204,7 @@ class App extends Component {
 
     //code
 
-    const chatmsg = (this.state.visible ? <ChatHome email={this.state.receiver_email} receiver={this.state.receiver} messages={this.state.messages} sender_pic={this.state.sender_pic} current_user={this.state.current_user} addMessage={this.handleaddMessage.bind(this)} /> : null);
+    const chatmsg = (this.state.visible ? <ChatHome email={this.state.receiver_email} receiver={this.state.receiver} messages={this.state.messages} sender_pic={this.state.sender_pic} current_user={this.state.current_user} call={this.handleCall.bind(this)} visible={this.state.call_visible} addMessage={this.handleaddMessage.bind(this)} /> : null);
     const chatfrm = (this.state.visible ? <ChatForm sender_pic={this.state.sender_pic} current_user={this.state.current_user} receiver={this.state.receiver} addMessage={this.handleaddMessage.bind(this)} /> : null);
     const file = (this.state.file_visible ? <FileSharing /> : null);
     const bckgrd = (!this.state.file_visible && !this.state.visible ? <Background /> : null);
