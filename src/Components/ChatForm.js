@@ -6,9 +6,17 @@ class ChatForm extends Component {
     constructor() {
         super();
         this.state = {
-            newmessage: {}
+            newmessage: {},
+            file_visible: false
         }
     }
+
+
+    onFileClick() {
+        // console.log("file clicked");
+        this.setState({ file_visible: true});
+        this.props.addFileVisibility();
+      }
 
     handleSubmit(e) {
         // console.log('check img_url:='+fire.auth().currentUser.photoURL+'user:='+fire.auth().currentUser.displayName);
@@ -39,7 +47,7 @@ class ChatForm extends Component {
                     <div style={formstyle}>
                         <input type="text" ref="text" />
                         <input type="submit" value="Send" />
-                        <a className="attach-icon" href="javascript:void(0)"><i className="fas fa-paperclip"></i></a>
+                        <a className="attach-icon" href="javascript:void(0)" onClick={() => this.onFileClick(this)}><i className="fas fa-paperclip"></i></a>
                     </div>
 
                 </form>

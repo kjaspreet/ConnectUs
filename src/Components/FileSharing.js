@@ -44,7 +44,7 @@ class FileSharing extends Component {
         // }
 
         return (
-            <div classNAme="chat-wrapper">
+            <div className="chat-wrapper">
             <div className="FileSharingForm">
                 <h5>Share files with your classmates</h5><br/><br/>
                 <FileSharingForm addFile={this.handleaddFile.bind(this)} /><br />

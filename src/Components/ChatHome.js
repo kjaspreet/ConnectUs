@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import fire from './fire';
 import uuid from 'uuid';
-
 import Try from './Try';
 
 class ChatHome extends Component {
@@ -76,12 +75,7 @@ class ChatHome extends Component {
   render() {
     const call = (this.props.visible ? <Try call={this.handleCall.bind(this)}  /> : null);
     const show_msg = (!this.props.visible? this.messageItems(): null);
-    // if(this.state.visible)
-    // {
-    //   return(<Try call={this.handleCall.bind(this)} />);
-    // }
-    // else
-    // {
+
     return (
       <div className="chat-wrapper">
       <div className="ChatHome">

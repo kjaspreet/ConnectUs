@@ -40,11 +40,12 @@ class FileListing extends Component {
   }
 
   render() {
+    const file = (this.state.url_visible ? this.state.file_url : null);
     return (
       <div className="FileList">  
           <h5>Click on File Name to get Download Link</h5>    
           {this.fileItems()}
-          <h5>Download Link</h5><br/>
+          <h5>Download Link</h5><a target="_blank" href={this.state.file_url}>{file}</a><br/>
       </div>
     );
   }

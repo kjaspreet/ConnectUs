@@ -73,6 +73,12 @@ class App extends Component {
     // console.log('msg table:=' + messages[0].photourl);
   }
 
+  handleshowfile()
+  {
+    this.setState({ file_visible: true, visible: false, contact_visible: false });
+    // console.log("file back clicked");
+  }
+
   handleCall(call)
   {
     // console.log(call);
@@ -171,10 +177,10 @@ class App extends Component {
 
   }
 
-  onFileClick() {
-    this.setState({ file_visible: true, visible: false, contact_visible: false });
-    // console.log("clicked");
-  }
+  // onFileClick() {
+  //   this.setState({ file_visible: true, visible: false, contact_visible: false });
+  //   // console.log("clicked");
+  // }
 
   onSignOut() {
     // console.log('signout');
@@ -205,7 +211,7 @@ class App extends Component {
     //code
 
     const chatmsg = (this.state.visible ? <ChatHome email={this.state.receiver_email} receiver={this.state.receiver} messages={this.state.messages} sender_pic={this.state.sender_pic} current_user={this.state.current_user} call={this.handleCall.bind(this)} visible={this.state.call_visible} addMessage={this.handleaddMessage.bind(this)} /> : null);
-    const chatfrm = (this.state.visible ? <ChatForm sender_pic={this.state.sender_pic} current_user={this.state.current_user} receiver={this.state.receiver} addMessage={this.handleaddMessage.bind(this)} /> : null);
+    const chatfrm = (this.state.visible ? <ChatForm sender_pic={this.state.sender_pic} current_user={this.state.current_user} receiver={this.state.receiver} addMessage={this.handleaddMessage.bind(this)} addFileVisibility={this.handleshowfile.bind(this)} /> : null);
     const file = (this.state.file_visible ? <FileSharing /> : null);
     const bckgrd = (!this.state.file_visible && !this.state.visible ? <Background /> : null);
     return (
@@ -239,7 +245,7 @@ class App extends Component {
           <div className="User-List col-sm-2 col-md-4">
             <div className="contact-list">
               <ul>
-                <h6 style={headingstyle} onClick={() => this.onFileClick(this)}><a href="javascript:void(0)">File Share</a></h6>
+                {/* <h6 style={headingstyle} onClick={() => this.onFileClick(this)}><a href="javascript:void(0)">File Share</a></h6> */}
                 <h6 style={headingstyle} onClick={() => this.onContactClick(this)}><a href="javascript:void(0)">Contacts</a></h6>
                 {this.User_list()} 
               </ul>
