@@ -82,14 +82,14 @@ class LoginForm extends Component {
                         <input type="text" ref="text" id="inputEmail" className="form-control" placeholder="Email" required autoFocus/>
                         <input type="password" ref="password" id="inputPassword" className="form-control" placeholder="Password" required/>
                         <div className="row">
-                            <div className="col-md-6">
+                            <div className="col-md-6 col-sm-6 col-6">
                                 <div id="remember" className="checkbox">
                                     <label>
                                         <input type="checkbox" value="remember-me"/> <small>Remember me</small>
                                     </label>
                                 </div>
                             </div>
-                            <div className="col-md-6 text-right">
+                            <div className="col-md-6 col-sm-6 col-6 text-right">
                                 <a href="javascript:void(0)" className="forgot-password" onClick={this.handleForgotPassword.bind(this)}>
                                     <small className="forgot-pass">Forgot password?</small>
                                 </a>

@@ -155,7 +155,7 @@ class App extends Component {
       <li key={"item-" + item} onClick={() => this.onItemClick(this, item)}>
         <div className="contact-wrap">
           <div className="row no-gutters">
-            <div className="col-md-2">
+            <div className="col-md-2 pro-img-res">
               <img className="user_img" src={this.state.users_pics[i]} />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             </div>
             <div className="col-md-10">
@@ -192,9 +192,9 @@ class App extends Component {
       color: 'black'
     }
 
-    // var userlist_style = {
-    //   padding: '1rem'
-    // }
+    var resStyle = {
+      padding:'0px 0px!important'
+    }
 
     var headingstyle = {
       fontWeight: "bold"
@@ -210,23 +210,20 @@ class App extends Component {
     const bckgrd = (!this.state.file_visible && !this.state.visible ? <Background /> : null);
     return (
       <div style={Appstyle} className="App">
-        <div className="navbar navbar-expand-lg navbar-light bg-light navbar-custom">
+        <div className="navbar  navbar-light bg-light navbar-custom">
           <a className="navbar-brand logo" href="javascript:void(0)"><img src={logo} alt="logo" className="" /></a>
-          <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span className="navbar-toggler-icon"></span>
-          </button>
+          
 
-          <div className="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-            <ul className="navbar-nav align-items-center nav-ul-custom">
-              <li className="nav-item">
+          <ul className="navbar-nav align-self-end nav-ul-custom">
+              {/* <li className="nav-item">
                 <a className="nav-link" href="javascript:void(0)"><i className="fas fa-search"></i></a>
               </li>
               <li className="nav-item">
                 <a className="nav-link" href="javascript:void(0)"><i className="fas fa-cog"></i></a>
-              </li>
-              <li className="nav-item dropdown">
-                <a className="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <img src={this.state.sender_pic} className="user_img" />&nbsp;<strong>{this.state.current_user}</strong>
+              </li> */}
+              <li className="nav-item dropdown nav_link_res">
+                <a style={resStyle} className="nav-link dropdown-toggle " href="javascript:void(0)" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <img src={this.state.sender_pic} className="user_img" />&nbsp;&nbsp;<strong className="user_name_res">{this.state.current_user}</strong>
                 </a>
                 <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                   {/* <a className="dropdown-item" href="#">My Account</a> */}
@@ -235,30 +232,29 @@ class App extends Component {
                 </div>
               </li>
             </ul>
-          </div>
         </div>
         {/* Main Body Starts */}
         <div className="MainBody row no-gutters">
           {/* User Contact List Part */}
-          <div className="User-List col-3 col-sm-3 col-md-3">
+          <div className="User-List col-sm-2 col-md-4">
             <div className="contact-list">
               <ul>
-                <h6 style={headingstyle} onClick={() => this.onContactClick(this)}><a href="javascript:void(0)">Contacts</a></h6>
-                {this.User_list()}
                 <h6 style={headingstyle} onClick={() => this.onFileClick(this)}><a href="javascript:void(0)">File Share</a></h6>
+                <h6 style={headingstyle} onClick={() => this.onContactClick(this)}><a href="javascript:void(0)">Contacts</a></h6>
+                {this.User_list()} 
               </ul>
             </div>
           </div>
           {/* Chat Area Part */}
-          <div className="col-9 col-sm-9 col-md-9">
+          <div className="col-sm-10 col-md-8 right-main-res">
             {/* Render Chat Form and Messages on Click */}
             {/* {chatpg} */}
             {bckgrd}
-            <div className="chat-wrapper">
+            {/* <div className="chat-wrapper"> */}
               {chatmsg}
               {chatfrm}
               {file}
-            </div>
+            {/* </div> */}
 
           </div>
         </div>

@@ -15,7 +15,7 @@ class FileSharing extends Component {
 
     //lifecycle method
     componentWillMount() {
-        let file_temp = [];
+        let file_temp = [];        
         //files
         let fileRef = fire.database().ref('files');
         fileRef.on('child_added', snapshot => {
@@ -44,10 +44,12 @@ class FileSharing extends Component {
         // }
 
         return (
+            <div classNAme="chat-wrapper">
             <div className="FileSharingForm">
                 <h5>Share files with your classmates</h5><br/><br/>
                 <FileSharingForm addFile={this.handleaddFile.bind(this)} /><br />
                 <FileListing files={this.state.file_list} deleteFile={this.handledeleteFile.bind(this)} />
+            </div>
             </div>
         );
     }

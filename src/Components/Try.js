@@ -18,8 +18,8 @@ class Try extends Component {
 
     render() {
         var myvideostyle = {
-            width: '800px',
-            height: '350px',
+            width: '92%',
+            height: '200px',
         }
         return (
             <div className="chat-inner-wrapper">

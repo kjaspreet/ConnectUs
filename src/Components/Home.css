@@ -14,9 +14,10 @@ body{
 	width: 50px;
 	border-radius: 50%;
 	margin: 0 auto;
+	height: 50px;
 }
 .nav-ul-custom li a{
-	border-right: 1.9px solid #ccc;
+	
 	padding: 0px 23px!important;
 	font-size: 13px;
 	color: #666!important;
@@ -41,7 +42,8 @@ body{
 	padding: 25px;
 	border-right: 1.5px solid #ddd;
 	height: calc(100vh - 68px);
-	overflow: auto;
+	overflow-y: auto;
+	overflow-x: hidden;
 }
 .contact-list ul{
 	padding-left: 0;
@@ -122,7 +124,7 @@ body{
 	margin: 0;
 }
 .home-wrapper{
-	height: 100%;
+	height: calc(100vh - 67px);
 	background: url("./../background.png");
 	background-size: cover;
 }
@@ -166,7 +168,7 @@ body{
 }
 .login-wrapper{	
 	width: 100%;
-	height: 100vh;	
+	min-height: 100vh;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -182,6 +184,8 @@ body{
 	border: 1px solid #818c94;
 	border: 1px solid rgba(0,0,0,0.4);
 	border-radius: 5px;
+
+	margin: 15px;
 }
 .login-form-logo {
     width: 250px;
@@ -248,9 +252,14 @@ body{
 	position: relative;
 	width:100%;
 }
+.attach-icon{
+	position: absolute;
+	top: 48px;
+	right: 120px;;
+}
 .ChatForm input[type="submit"]{
 	position: absolute;
-	top:53px;
+	top:50px;
 	right:50px;
 	padding-left: 15px;
     margin-left: 15px;
@@ -319,8 +328,151 @@ body{
 
 
 
+.User-List{
+	height: calc(100vh - 67px);
+}
+.right-main-res{
+	height: calc(100vh - 67px);
+}
+.nav-ul-custom {
+    margin: 0;
+}
+.navbar-nav .dropdown-menu {
+    position: absolute;
+    float: none;
+    top: 50px;
+    left: 22px;
+}
 
-
+.sender .user_img {
+    float: right;
+    margin: -6px 0 0 10px;
+}
+@media(max-width:400px){
+	.chat-title h5 {
+		font-size: 14px;
+		font-weight: 600;
+		margin-bottom: 4px;
+	}
+	.chat-title small {
+		font-size: 11px;
+	}
+	.call-btn{
+		height: 27px;
+		width: 27px;
+		min-height: 27px;
+		min-width: 27px;
+		margin:0 6px 0 0 !important;
+	}
+	.call-btn svg{
+		height: 12px;
+	}
+}
+@media(max-width:460px){
+	.user_name_res{
+		display: none;
+	}
+	.nav_link_res a{
+		padding:0px 0px!important; 
+	}
+}
+@media(max-width:575px){
+	.top-banner h3{
+		font-size: 20px;
+	}
+	.app-descrip{
+		font-size: 13px;
+	}
+	
+}
+@media(max-width:767px){
+	.msg-wrapper{
+		display: none;
+	}
+	.pro-img-res{
+		text-align: center;
+	}
+	.User-List {
+		width: 100px !important;
+		max-width: 100px !important;
+		position: fixed;
+		z-index: 1000;
+		background: #fff;
+		top:67px;
+	}
+	.navbar-custom {
+		position: fixed;
+		width: 100%;
+		background: #fff;
+		z-index: 100000000;
+	}
+	.right-main-res{
+		width: calc(100% - 100px);
+		height: calc(100vh - 67px);
+		max-width: 100%;
+		margin-left: 100px;
+		position: fixed;
+		top: 67px;
+	}
+	.contact-list ul h6 {
+		font-size: 13px;
+		margin-bottom: 20px;
+	}
+	.contact-list {
+		padding: 17px;
+	}
+	.nav-ul-custom li a{
+		padding: 0px!important;
+	}
+	.receiver p {
+		font-size: 13px;
+	}
+	.sender p {
+		font-size: 13px;
+	}
+}
+@media(max-width:850px){
+	.contact-name a {
+		margin-left: 5px;
+	}
+}
+@media(max-width:991px){
+	.chat-wrappers{
+		position: relative;
+	}
+	.ChatForm{
+		position: absolute;
+		bottom: 15px;
+		width: 100%;
+		left: 0;
+	}
+	.ChatForm form div{
+		padding-bottom:0.5rem!important;
+	}
+	.chat-inner-wrapper{
+		min-height: 300px;
+		max-height: 300px;
+	}
+	.chat-inner-wrapper iframe{
+		height: 200px!important;
+	}
+}
+@media(min-width:992px){
+	.chat-inner-wrapper iframe{
+		height: 300px!important;
+	}
+}
+@media(max-width:1199px){
+	.call-btn{
+		margin-right: 15px;
+	}
+	.receiver p {
+		font-size: 13px;
+	}
+	.sender p {
+		font-size: 13px;
+	}
+}
 
 
 

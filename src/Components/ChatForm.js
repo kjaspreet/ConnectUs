@@ -33,16 +33,18 @@ class ChatForm extends Component {
             padding:"2em"
         }
         return (
+            
             <div className="ChatForm">
                 <form onSubmit={this.handleSubmit.bind(this)}>
                     <div style={formstyle}>
                         <input type="text" ref="text" />
                         <input type="submit" value="Send" />
-                        
+                        <a className="attach-icon" href="javascript:void(0)"><i className="fas fa-paperclip"></i></a>
                     </div>
 
                 </form>
             </div>
+            
         );
     }
 }

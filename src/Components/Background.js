@@ -13,7 +13,7 @@ class Background extends Component {
                     </div>
                     <p className="text-center app-descrip">Select someone from your contacts to start a new <br />chat and explore more</p>
                     <div className="row no-gutters">
-                        <div className="col-md-4 offset-md-4 text-center">
+                        <div className="col-md-6 offset-md-3 text-center">
                             <a href="javascript:void(0)" className="start-button">Start a new chat</a>
                         </div>
                     </div>
