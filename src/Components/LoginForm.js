@@ -18,6 +18,7 @@ class LoginForm extends Component {
     }
 
     handleSubmit(e) {
+        var not_found = false;
         if (this.refs.text.value === '' || this.refs.password.value === '') {
             alert("Enter Details");
         }
@@ -36,7 +37,7 @@ class LoginForm extends Component {
                     }
                     else
                     {
-                        alert('Invalid user details');
+                        not_found = true;
                     }
                 });
 
@@ -45,6 +46,10 @@ class LoginForm extends Component {
                     // this.setState({ submitted: false });
                 });
                 // this.setState({ submitted: true });
+                if(not_found)
+                {
+                    alert('Invalid user details');
+                }
 
             });
 
