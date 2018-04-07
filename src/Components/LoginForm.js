@@ -30,27 +30,27 @@ class LoginForm extends Component {
             }, function () {
                 let userRef = fire.database().ref('users');
 
-                userRef.on('child_added', snapshot => {
-                    if (snapshot.val().username === this.state.user && snapshot.val().password === this.state.password) {
-                        this.setState({ submitted: true });
-                        not_found = false;
-                        // console.log('connected: ' + snapshot.child("username").val());
-                    }
-                    else
-                    {
-                        not_found = true;
-                    }
-                });
+                // userRef.on('child_added', snapshot => {
+                //     if (snapshot.val().username === this.state.user && snapshot.val().password === this.state.password) {
+                //         this.setState({ submitted: true });
+                //         not_found = false;
+                //         // console.log('connected: ' + snapshot.child("username").val());
+                //     }
+                //     else
+                //     {
+                //         not_found = true;
+                //     }
+                // });
 
                 fire.auth().signInWithEmailAndPassword(this.refs.text.value, this.refs.password.value).catch(function(error) {
                     console.log('login failed');
                     // this.setState({ submitted: false });
                 });
-                // this.setState({ submitted: true });
-                if(not_found)
-                {
-                    alert('Invalid user details');
-                }
+                this.setState({ submitted: true });
+                // if(not_found)
+                // {
+                //     alert('Invalid user details');
+                // }
 
             });
 
