@@ -33,6 +33,7 @@ class LoginForm extends Component {
                 userRef.on('child_added', snapshot => {
                     if (snapshot.val().username === this.state.user && snapshot.val().password === this.state.password) {
                         this.setState({ submitted: true });
+                        not_found = false;
                         // console.log('connected: ' + snapshot.child("username").val());
                     }
                     else
