@@ -29,18 +29,22 @@ class LoginForm extends Component {
             }, function () {
                 let userRef = fire.database().ref('users');
 
-                // userRef.on('child_added', snapshot => {
-                //     if (snapshot.val().username === this.state.user && snapshot.val().password === this.state.password) {
-                //         this.setState({ submitted: true });
-                //         // console.log('connected: ' + snapshot.child("username").val());
-                //     }
-                // });
+                userRef.on('child_added', snapshot => {
+                    if (snapshot.val().username === this.state.user && snapshot.val().password === this.state.password) {
+                        this.setState({ submitted: true });
+                        // console.log('connected: ' + snapshot.child("username").val());
+                    }
+                    else
+                    {
+                        alert('Invalid user details');
+                    }
+                });
 
                 fire.auth().signInWithEmailAndPassword(this.refs.text.value, this.refs.password.value).catch(function(error) {
                     console.log('login failed');
                     // this.setState({ submitted: false });
                 });
-                this.setState({ submitted: true });
+                // this.setState({ submitted: true });
 
             });
 
