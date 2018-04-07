@@ -18,7 +18,7 @@ class LoginForm extends Component {
     }
 
     handleSubmit(e) {
-        var not_found = false;
+        // var found = false;
         if (this.refs.text.value === '' || this.refs.password.value === '') {
             alert("Enter Details");
         }
@@ -28,30 +28,20 @@ class LoginForm extends Component {
                 user: this.refs.text.value,
                 password: this.refs.password.value
             }, function () {
-                let userRef = fire.database().ref('users');
 
-                // userRef.on('child_added', snapshot => {
-                //     if (snapshot.val().username === this.state.user && snapshot.val().password === this.state.password) {
-                //         this.setState({ submitted: true });
-                //         not_found = false;
-                //         // console.log('connected: ' + snapshot.child("username").val());
-                //     }
-                //     else
-                //     {
-                //         not_found = true;
-                //     }
-                // });
+                fire.database().ref('users').orderByChild('email').equalTo(this.refs.text.value).on('child_added', snapshot => {
+                    if(snapshot.val().password === this.refs.password.value)
+                        this.setState({ submitted: true }); 
+                    else
+                    {
+                        alert('Invalid Password');
+                    }
+                });
 
                 fire.auth().signInWithEmailAndPassword(this.refs.text.value, this.refs.password.value).catch(function(error) {
-                    console.log('login failed');
-                    // this.setState({ submitted: false });
+                    // console.log('login failed');
                 });
-                this.setState({ submitted: true });
-                // if(not_found)
-                // {
-                //     alert('Invalid user details');
-                // }
-
+                // this.setState({ submitted: true });
             });
 
         }
