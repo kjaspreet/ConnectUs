@@ -455,9 +455,11 @@ body{
 	}
 	.receiver p {
 		font-size: 13px;
+		word-wrap: break-word;
 	}
 	.sender p {
 		font-size: 13px;
+		word-wrap: break-word;
 	}
 	.sign-out-wrap{
 		left: 0px!important;
