@@ -9,9 +9,9 @@ class LoginForm extends Component {
     constructor() {
         super();
         this.state = {
-            user: '',
-            password: '',
-            submitted: false,
+            user: localStorage.getItem('email') || '',
+            password: localStorage.getItem('password') || '',
+            submitted: localStorage.getItem('flag') || false,
             clicked: false,
             forgot_pass: false
         }
@@ -31,7 +31,12 @@ class LoginForm extends Component {
 
                 fire.database().ref('users').orderByChild('email').equalTo(this.refs.text.value).on('child_added', snapshot => {
                     if(snapshot.val().password === this.refs.password.value)
-                        this.setState({ submitted: true }); 
+                    {
+                        this.setState({ submitted: true });
+                        localStorage.setItem('email',snapshot.val().email);
+                        localStorage.setItem('password',snapshot.val().password)
+                        localStorage.setItem('flag',true);
+                    }
                     else
                     {
                         alert('Invalid Password');

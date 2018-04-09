@@ -185,6 +185,9 @@ class App extends Component {
   onSignOut() {
     // console.log('signout');
     fire.auth().signOut();
+    localStorage.removeItem('email');
+    localStorage.removeItem('password');
+    localStorage.removeItem('flag');
   }
 
   onContactClick() {
