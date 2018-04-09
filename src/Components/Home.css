@@ -325,10 +325,14 @@ body{
 }
 .filess-list{
 	padding-left: 0;
+	margin-bottom: 15px;
 }
 
 .filess-list li{
 	list-style: none;
+	float: left;
+	width: 100%;
+	padding-bottom: 2px;
 }
 .trash-btn{
 	background: transparent;
