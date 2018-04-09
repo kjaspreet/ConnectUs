@@ -408,7 +408,7 @@ body{
 	}
 	.right-main-res{
 		width: calc(100% - 100px);
-		height: calc(100vh - 67px);
+		height: calc(100vh - 100px);
 		max-width: 100%;
 		margin-left: 100px;
 		position: fixed;
@@ -430,6 +430,10 @@ body{
 	.sender p {
 		font-size: 13px;
 	}
+	.sign-out-wrap{
+		left: 0px!important;
+		padding-left: 10px;
+	}
 }
 @media(max-width:850px){
 	.contact-name a {
@@ -450,8 +454,8 @@ body{
 		padding-bottom:0.5rem!important;
 	}
 	.chat-inner-wrapper{
-		min-height: 300px;
-		max-height: 300px;
+		min-height: 350px;
+		max-height: 350px;
 	}
 	.chat-inner-wrapper iframe{
 		height: 200px!important;

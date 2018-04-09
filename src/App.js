@@ -234,7 +234,7 @@ class App extends Component {
                 <a style={resStyle} className="nav-link dropdown-toggle " href="javascript:void(0)" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <img src={this.state.sender_pic} className="user_img" />&nbsp;&nbsp;<strong className="user_name_res">{this.state.current_user}</strong>
                 </a>
-                <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                <div className="dropdown-menu sign-out-wrap" aria-labelledby="navbarDropdown">
                   {/* <a className="dropdown-item" href="#">My Account</a> */}
                   {/* <div className="dropdown-divider"></div> */}
                   <a className="dropdown-item" href="" onClick={() => this.onSignOut(this)}>Sign Out</a>

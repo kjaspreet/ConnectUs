@@ -47,7 +47,7 @@ class ChatForm extends Component {
                     <div style={formstyle}>
                         <input type="text" ref="text" />
                         <input type="submit" value="Send" />
-                        <a className="attach-icon" href="javascript:void(0)" onClick={() => this.onFileClick(this)}><i className="fas fa-paperclip"></i></a>
+                        <a className="attach-icon" href="javascript:void(0)" onClick={() => this.onFileClick(this)}><i className="fa fa-file"></i></a>
                     </div>
 
                 </form>
