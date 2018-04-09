@@ -46,7 +46,7 @@ class FileSharing extends Component {
         return (
             <div className="chat-wrapper">
             <div className="FileSharingForm">
-                <h5>Share files with your class</h5><br/><br/>
+                <h6><b>Share files with your class</b></h6>
                 <FileSharingForm addFile={this.handleaddFile.bind(this)} /><br />
                 <FileListing files={this.state.file_list} deleteFile={this.handledeleteFile.bind(this)} />
             </div>

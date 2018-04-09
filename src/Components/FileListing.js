@@ -33,19 +33,19 @@ class FileListing extends Component {
   fileItems(){
     const listItems = this.props.files.map((item) =>
       <li className="Files" key={item} >
-         <h5><a href="javascript:void(0)" onClick={() => this.onItemClick(this, item)}>{item}</a>&nbsp;&nbsp;&nbsp;&nbsp;<button onClick={() => this.onDeleteFile(this, item)}>X</button></h5>
+    <a href="javascript:void(0)" onClick={() => this.onItemClick(this, item)}>{item}</a>&nbsp;&nbsp;&nbsp;&nbsp;<button className="trash-btn" onClick={() => this.onDeleteFile(this, item)}><i className="fa fa-trash"></i></button>
       </li>
     );
-    return <ul>{listItems}</ul>;
+    return <ul className="filess-list">{listItems}</ul>;
   }
 
   render() {
     const file = (this.state.url_visible ? this.state.file_url : null);
     return (
       <div className="FileList">  
-          <h5>Click on File Name to get Download Link</h5>    
+          <h6><b>Click on File Name to get Download Link</b></h6>    
           {this.fileItems()}
-          <h5>Download Link</h5><a target="_blank" href={this.state.file_url}>{file}</a><br/>
+          <h6>Download Link</h6><a target="_blank" href={this.state.file_url}>{file}</a><br/>
       </div>
     );
   }

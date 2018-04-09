@@ -77,7 +77,7 @@ class FileSharingForm extends Component {
     render() {
         return (
             <form onSubmit={this.handleSubmit.bind(this)}>
-                <div>
+                <div className="file-sh-btns">
                     <input type="file" ref={(ref) => this.fileUpload = ref} id="file" />
                     <input type="submit" value="Upload" />
                     <br />

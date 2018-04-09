@@ -323,9 +323,28 @@ body{
 .UserList li{
 	list-style: none;
 }
+.filess-list{
+	padding-left: 0;
+}
 
-
-
+.filess-list li{
+	list-style: none;
+}
+.trash-btn{
+	background: transparent;
+	border: none;
+	float: right;
+}
+.trash-btn svg {
+	font-size: 12px;
+	color: cornflowerblue;
+}
+.FileSharingForm{
+	word-wrap: break-word;
+}
+.file-sh-btns input{
+	font-size: 12px;
+}
 
 
 .User-List{
@@ -369,7 +388,7 @@ body{
 	}
 	.FileSharingForm{
 		padding-right: 15px;
-		min-height: 100vh;
+		height: 80vh;
 		overflow-y: auto;
 		overflow-x: hidden;
 	}
