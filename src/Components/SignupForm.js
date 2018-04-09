@@ -93,6 +93,7 @@ class SignUpForm extends Component {
                     <span id="reauth-email" className="reauth-email"></span>
                     <input type="text" ref="fullname" id="inputFirstname" className="form-control" placeholder="Full Name" required autoFocus />
                     <input type="email" ref="etext" id="inputEmail" className="form-control" placeholder="Email" required autoFocus />
+                    <label className="signup-label">Choose Your Profile Picture</label>
                     <input type="file" className="form-control" ref={(ref) => this.fileUpload = ref} id="file" required autoFocus />
                     <input type="password" ref="password" id="inputPassword" className="form-control" placeholder="Password" required />
                     <input type="password" ref="cpassword" id="inputCPassword" className="form-control" placeholder="Confirm Password" required />

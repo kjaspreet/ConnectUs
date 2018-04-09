@@ -371,6 +371,11 @@ body{
     float: right;
     margin: -6px 0 0 10px;
 }
+
+.signup-label{
+	font-size: 12px;
+}
+
 @media(max-width:400px){
 	.chat-title h5 {
 		font-size: 14px;
